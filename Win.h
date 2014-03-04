@@ -35,10 +35,10 @@
 //Used in orienting roads and cars
 enum
 {
-  NORTH,
-  EAST,
-  SOUTH,
-  WEST
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
 };
 
 HWND  WinHwnd (void);

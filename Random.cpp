@@ -1,13 +1,13 @@
 /*-----------------------------------------------------------------------------
-									               r a n d o m
+r a n d o m
 -----------------------------------------------------------------------------*/
 
 /*-----------------------------------------------------------------------------
-  The Mersenne Twister by Matsumoto and Nishimura <matumoto@math.keio.ac.jp>.
-  It sets new standards for the period, quality and speed of random number
-  generators. The incredible period is 2^19937 - 1, a number with about 6000
-  digits; the 32-bit random numbers exhibit best possible equidistribution
-  properties in dimensions up to 623; and it's fast, very fast. 
+The Mersenne Twister by Matsumoto and Nishimura <matumoto@math.keio.ac.jp>.
+It sets new standards for the period, quality and speed of random number
+generators. The incredible period is 2^19937 - 1, a number with about 6000
+digits; the 32-bit random numbers exhibit best possible equidistribution
+properties in dimensions up to 623; and it's fast, very fast. 
 -----------------------------------------------------------------------------*/
 
 
@@ -37,27 +37,27 @@ static unsigned long    ptgfsr[N];
 unsigned long RandomVal (void)
 {
 
-  int		            kk;
-  unsigned long	    y;
-  
-  if (k == N) {
-    for (kk = 0; kk < N - M; kk++) {
-      y = (ptgfsr[kk] & UPPER_MASK) | (ptgfsr[kk + 1] & LOWER_MASK);
-      ptgfsr[kk] = ptgfsr[kk + M] ^ (y >> 1) ^ mag01[y & 0x1];
-      }
-    for (; kk < N - 1; kk++) {
-      y = (ptgfsr[kk] & UPPER_MASK) | (ptgfsr[kk + 1] & LOWER_MASK);
-      ptgfsr[kk] = ptgfsr[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1];
-      }
-    y = (ptgfsr[N - 1] & UPPER_MASK) | (ptgfsr[0] & LOWER_MASK);
-    ptgfsr[N - 1] = ptgfsr[M - 1] ^ (y >> 1) ^ mag01[y & 0x1];
-    k = 0;
-    }
-  y = ptgfsr[k++];
-  y ^= TEMPERING_SHIFT_U (y);
-  y ^= TEMPERING_SHIFT_S (y) & TEMPERING_MASK_B;
-  y ^= TEMPERING_SHIFT_T (y) & TEMPERING_MASK_C;
-  return y ^= TEMPERING_SHIFT_L (y);
+	int		            kk;
+	unsigned long	    y;
+
+	if (k == N) {
+		for (kk = 0; kk < N - M; kk++) {
+			y = (ptgfsr[kk] & UPPER_MASK) | (ptgfsr[kk + 1] & LOWER_MASK);
+			ptgfsr[kk] = ptgfsr[kk + M] ^ (y >> 1) ^ mag01[y & 0x1];
+		}
+		for (; kk < N - 1; kk++) {
+			y = (ptgfsr[kk] & UPPER_MASK) | (ptgfsr[kk + 1] & LOWER_MASK);
+			ptgfsr[kk] = ptgfsr[kk + (M - N)] ^ (y >> 1) ^ mag01[y & 0x1];
+		}
+		y = (ptgfsr[N - 1] & UPPER_MASK) | (ptgfsr[0] & LOWER_MASK);
+		ptgfsr[N - 1] = ptgfsr[M - 1] ^ (y >> 1) ^ mag01[y & 0x1];
+		k = 0;
+	}
+	y = ptgfsr[k++];
+	y ^= TEMPERING_SHIFT_U (y);
+	y ^= TEMPERING_SHIFT_S (y) & TEMPERING_MASK_B;
+	y ^= TEMPERING_SHIFT_T (y) & TEMPERING_MASK_C;
+	return y ^= TEMPERING_SHIFT_L (y);
 
 }
 
@@ -68,7 +68,7 @@ unsigned long RandomVal (void)
 unsigned long RandomVal (int range)
 {
 
-  return range ? (RandomVal () % range) : 0;
+	return range ? (RandomVal () % range) : 0;
 
 }
 
@@ -79,15 +79,15 @@ unsigned long RandomVal (int range)
 void RandomInit (unsigned long seed)
 {
 
-  //int	    k;
-  
-  //memset (ptgfsr, 0, sizeof (ptgfsr));
-  //mag01[0] = 0x0;
-  //mag01[1] = MATRIX_A;
-  ptgfsr[0] = seed;
-  for (k = 1; k < N; k++)
-    ptgfsr[k] = 69069 * ptgfsr[k - 1];
-  k = 1;
+	//int	    k;
+
+	//memset (ptgfsr, 0, sizeof (ptgfsr));
+	//mag01[0] = 0x0;
+	//mag01[1] = MATRIX_A;
+	ptgfsr[0] = seed;
+	for (k = 1; k < N; k++)
+		ptgfsr[k] = 69069 * ptgfsr[k - 1];
+	k = 1;
 
 }
 
